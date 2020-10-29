@@ -1,5 +1,0 @@
-package com.springBootRest.RestfulApi.exceptions;
-
-public class ProductNotFoundResponse {
-
-}

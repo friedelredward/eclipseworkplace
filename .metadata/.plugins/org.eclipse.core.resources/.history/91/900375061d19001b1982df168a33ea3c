@@ -1,7 +1,0 @@
-package com.springBootRest.RestfulApi.services;
-
-public class ProductService {
-
-	
-
-}

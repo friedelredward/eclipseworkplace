@@ -1,5 +1,0 @@
-package com.springBootRest.RestfulApi.repos;
-
-public class ProductRepository {
-
-}
