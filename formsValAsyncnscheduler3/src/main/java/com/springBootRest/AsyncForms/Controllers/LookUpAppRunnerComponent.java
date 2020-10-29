@@ -31,17 +31,17 @@ public class LookUpAppRunnerComponent implements CommandLineRunner{
 	    
 	/** Kick of multiple, asynchronous(parallel) lookups which will  use poll of threads at need when available
 	 */
-		CompletableFuture<User> info1 = gitService.findUser("Pytorch");
+		CompletableFuture<User> user1 = gitService.findUser("Pytorch");
 		CompletableFuture<User> info2 = gitService.findUser("Tensorflow");
 		CompletableFuture<User> info3 = gitService.findUser("Scikit-learn");
 		CompletableFuture<User> info4 = gitService.findUser("spring-boot");
 		CompletableFuture<User> info5 = gitService.findUser("spring-mvc");
 		CompletableFuture<User> info6 = gitService.findUser("spring-security");
 		
-		CompletableFuture.allOf(info1,info2,info3,info4,info5,info6).join();
+		CompletableFuture.allOf(user1,info2,info3,info4,info5,info6).join();
 		
 		logger.info("Elapsed time: " + (System.currentTimeMillis() - start));
-		logger.info("--> " +info1.get());
+		logger.info("--> " +user1.get());
 		logger.info("--> " +info2.get());
 		logger.info("--> " +info3.get());
 		logger.info("--> " +info4.get());
