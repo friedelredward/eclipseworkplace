@@ -1,0 +1,27 @@
+package com.springBootRest.RestfulApi.controllers;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springBootRest.RestfulApi.models.Product;
+import com.springBootRest.RestfulApi.services.ProductService;
+
+@RestController
+public class ProductController {
+	@Autowired
+	private ProductService pService;
+	
+	@GetMapping("products")
+	public List<Product> listProducts(){
+		return Arrays.asList(
+				new Product("1", "ordenador1"),
+				new Product("2", "ordenador2"),
+				new Product("3", "ordenador3"),
+				new Product("4", "ordenador4")
+				);
+	}
+}

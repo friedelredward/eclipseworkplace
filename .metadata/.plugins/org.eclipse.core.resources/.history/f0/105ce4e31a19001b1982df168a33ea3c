@@ -1,0 +1,5 @@
+package com.springBootRest.RestfulApi.models;
+
+public class Product {
+
+}

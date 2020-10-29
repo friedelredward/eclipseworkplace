@@ -1,0 +1,58 @@
+package com.springBootRest.AsyncForms.Controllers;
+
+import java.util.concurrent.CompletableFuture;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import com.springBootRest.AsyncForms.Services.LookUpGitService;
+import com.springBootRest.AsyncForms.models.User;
+
+@Component
+public class LookUpAppRunnerComponent implements CommandLineRunner{
+	private static final Logger logger = LoggerFactory.getLogger(LookUpAppRunnerComponent.class);
+/**
+ * 
+	private final LookUpGitService gitService;
+	public LookUpAppRunnerComponent(LookUpGitService gitService) {
+		this.gitService = gitService;
+	}
+	REPLACED BY*/
+	@Autowired
+	private LookUpGitService gitService;
+
+	@Override
+	public void run(String... args) throws Exception {
+		// Start the clock
+	    long start = System.currentTimeMillis();
+	    
+	 // Kick of multiple, asynchronous(parallel) lookups
+	    CompletableFuture<User> user1= gitService.findUser("Pytorch");
+		CompletableFuture<User> user2= gitService.findUser("Tensorflow");
+		CompletableFuture<User> user3= gitService.findUser("Scikit-learn");
+		CompletableFuture<User> user4= gitService.findUser("spring-boot");
+		CompletableFuture<User> user5= gitService.findUser("spring-mcv");
+		CompletableFuture<User> user6= gitService.findUser("spring-security");
+		
+		// Wait until they are all done
+	    CompletableFuture.allOf(user1,
+	    						user2,
+	    						user3,
+	    						user4,
+	    						user5,
+	    						user6).join();
+
+		// Print results, including elapsed time
+	    logger.info("Elapsed time: " + (System.currentTimeMillis() - start));
+	    logger.info("--> " + user1.get());
+	    logger.info("--> " + user2.get());
+	    logger.info("--> " + user3.get());
+	    logger.info("--> " + user4.get());
+	    logger.info("--> " + user5.get());
+	    logger.info("--> " + user6.get());
+	}
+
+}

@@ -1,0 +1,16 @@
+package com.springBootRest.RestfulApi.exceptions;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@ControllerAdvice
+public class ProductNotFoundResponse {
+
+	@ResponseBody
+	@ExceptionHandler(ProductNotFoundException.class)
+	
+	String productNotFoundHandler(ProductNotFoundException exception) {
+		return exception.getMessage();
+	}
+}
