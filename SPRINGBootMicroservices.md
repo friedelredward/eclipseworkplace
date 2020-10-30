@@ -476,6 +476,34 @@ Running on *DIFFERENT* background threads(__parallel__)
 ## Forms(starter-web+thymeleaf)
 - By **default** `@Controller` any mmapping(route) returns __logical_VIEWS__
 
+# JavaMailSender
+- `starter-web`+`thymeleaf`+ `spring-boot-starter-mail`
+- gmail :pej: `+Enable IMAP+` + `lessecureapps`> ON
+> `@Configuration` specifies it's not a controller but a config file for the app. if we tag it with `CommandLineRunner` spring will autoexec it!
+- MIME msg for using attachements
+## interceptors
+- web mvc; any web REQ is intercepted by dispatcher servlet -> handler mappings to match. _Middleware_ :: parse requests before sending them to handler method(route)
+> `implements HandlerInterceptor`  + `@Component` in controller + 
+```java
+package.... .config
+@Component 
+public class WebAppConfig implements WebMvcConfigurer{
+	@Autowired
+	private AnyInterceptor interceptorInjected;
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry reg){
+		reg.addInterceptor(interceptorInjected);
+	}
+}
+```
+- `preHandler`== before it reaches endpoint u can modify request... etc `return true`
+- `postHandler`== method executed but view NOT rendered. :pej adding something to the model to display:
+- `afterCompletion` after ALL has been executed
+
+
+
+
 
 
 
