@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class ProxysAndRoutingApplication {
 
-	@RequestMapping(value="/enpoint1")
+	@RequestMapping(value="/endpoint1")
 	public String enpoint1() {
 		return "<h2 style='color:tomato'>Hellow from enpoint1</h2>";
 	}
 	
-	@RequestMapping(value="/enpoint2")
+	@RequestMapping(value="/endpoint2")
 	public String enpoint2() {
 		return "<h2 style='color :violet'>Hellow from enpoint2</h2>";
 	}
