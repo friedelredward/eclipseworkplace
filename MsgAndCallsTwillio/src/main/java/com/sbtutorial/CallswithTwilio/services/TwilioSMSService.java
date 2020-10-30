@@ -11,7 +11,8 @@ public class TwilioSMSService {
 	public void runSMS(String twilioNumber, String targetNumber) {
 		Message.creator(new PhoneNumber(targetNumber),
 					new PhoneNumber(twilioNumber),
-					"Hellow Ma nnigga Best bro Ever ❤ Redwardweb :D"
+					"<-IGNORAR hasta aqui.|\r\n"
+					+"mensage"
 				).create();
 		System.out.println("App::(SmsService):Message SENT (to-Api).......");
 	}
