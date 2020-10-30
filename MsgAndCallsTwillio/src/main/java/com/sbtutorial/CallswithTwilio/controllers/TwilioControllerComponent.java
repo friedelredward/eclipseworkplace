@@ -23,13 +23,13 @@ public class TwilioControllerComponent implements CommandLineRunner {
 	}
 	
 	@Autowired
-	private TwilioCallService scallService;
+	private TwilioSMSService smsService;
 	
 	@Override
 	public void run(String... args) throws Exception {
 			logger.info("Twilliocontroller started:init::->OK");
-			scallService.runCall(T_NUMBER, "+34601371747");
-			logger.info("App:Controller::finished sending...");
+//			smsService.runSMS(T_NUMBER, "+34601371747");
+//			logger.info("App:Controller::finished sending...");
 		
 	}
 	

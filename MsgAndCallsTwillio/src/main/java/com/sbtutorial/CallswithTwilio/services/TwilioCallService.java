@@ -12,8 +12,8 @@ import com.twilio.type.PhoneNumber;
 public class TwilioCallService {
 	
 	public void runCall(String twilioNumber, String targetNumber) throws URISyntaxException {
-		Call call=Call.creator(new PhoneNumber(twilioNumber),
-				new PhoneNumber(targetNumber),
+		Call call=Call.creator(new PhoneNumber(targetNumber),
+				new PhoneNumber(twilioNumber),
 				URI.create("http://demo.twilio.com/docs/voice.xml"))
 				.create();
 		System.out.println("App::(CallService):Making call.......");
