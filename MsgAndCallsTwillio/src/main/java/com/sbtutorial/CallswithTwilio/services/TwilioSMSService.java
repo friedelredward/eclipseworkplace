@@ -11,8 +11,8 @@ public class TwilioSMSService {
 	public void runSMS(String twilioNumber, String targetNumber) {
 		Message.creator(new PhoneNumber(targetNumber),
 					new PhoneNumber(twilioNumber),
-					"Hellow desde twilio sDK spring boot Redwardweb :D"
+					"Hellow Ma nnigga Best bro Ever ❤ Redwardweb :D"
 				).create();
-		System.out.println("App::(SmsService):Sending meesage.......");
+		System.out.println("App::(SmsService):Message SENT (to-Api).......");
 	}
 }
