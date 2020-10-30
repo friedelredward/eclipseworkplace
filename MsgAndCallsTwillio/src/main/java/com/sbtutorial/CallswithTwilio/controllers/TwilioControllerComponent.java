@@ -13,6 +13,7 @@ import com.twilio.Twilio;
 
 @Component
 public class TwilioControllerComponent implements CommandLineRunner {
+	private static final Logger logger= LoggerFactory.getLogger(TwilioControllerComponent.class);
 	@Value("${app.twilo.id}")
 	private String twilioId;
 	@Value("${app.twilo.authid}")
@@ -20,9 +21,6 @@ public class TwilioControllerComponent implements CommandLineRunner {
 	@Value("${app.twilo.tnumber}")
 	private String tnumber;
 	
-	private static final Logger logger= LoggerFactory.getLogger(TwilioControllerComponent.class);
-	private static final String T_ID="ACfa78a6e5b3e391a3431d8272c237b614";
-	private static final String T_AUTH_ID="18e703301747780f3cd7f7d7277faceb";
 	public static final String T_NUMBER="+16502065490";
 	//+15046845213
 	
