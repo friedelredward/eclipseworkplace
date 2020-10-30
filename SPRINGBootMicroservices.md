@@ -501,10 +501,104 @@ public class WebAppConfig implements WebMvcConfigurer{
 - `postHandler`== method executed but view NOT rendered. :pej adding something to the model to display:
 - `afterCompletion` after ALL has been executed
 
+## ZUUL EDGE API proxys(upgrade from interceptors) **ROUTING** and __filtering__ (`spring-boot-starter-web`)
+- +Monitoring
+- +Securing
+> We make app main entrypoint as such... REMEMBER!! `@RestController` returns by default a json (_public String method()_) ;). this is a separate STANDALONE
+<details>
+  <summary>API</summary>
 
+> application.properties
+```
+spring.application.name=product
+server.port=7070
+```
 
+```java
+//this is the main app the zuull is the proxy
+package com.sbtutorial.proxy;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@SpringBootApplication
+public class ProxysAndRoutingApplication {
 
+	@RequestMapping(value="/enpoint1")
+	public String enpoint1() {
+		return "<h2 style='color:tomato'>Hellow from enpoint1</h2>";
+	}
+	
+	@RequestMapping(value="/enpoint2")
+	public String enpoint2() {
+		return "<h2 style='color :violet'>Hellow from enpoint2</h2>";
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(ProxysAndRoutingApplication.class, args);
+	}
 
+}
+```
 
+</details>
+
+<details>
+  <summary>Proxy(with zuul)</summary>
+
+> application.properties
+```
+zuul.routes.product.url=http://localhost:7070
+server.port=8080
+```
+> check filters(in *processing lifetime ORDER* 1st-last) :`Router` -> `pre`, -> `POst`, in case somtheing fails, fallback to `Error`
+- we explicitly intantiate as `@Bean`s for spring (cuz till now they'r just POJOs(plainold java objcts))
+```java
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+@SpringBootApplication
+@EnableZuulProxy
+public class ProxysAndRoutingProxyApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProxysAndRoutingProxyApplication.class, args);
+	}
+	@Bean
+	public RoutingFilter routingFilter() {
+		return new RoutingFilter();
+	}
+	@Bean
+	public PreFilter preFilter() {
+		return new PreFilter();
+	}
+	@Bean
+	public PostFilter postFilter() {
+		return new PostFilter();
+	}
+	@Bean
+	public ErrorFilter errorFilter() {
+		return new ErrorFilter();
+	}
+}
+```
+
+</details>
+- to trigger errorFilter keep down API, Up Proxy and make request to api endpoint :D
+
+## Twilio __sdk__ integration on `starter-web`(proj::MsgAndCallsTwilio)
+```xml
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>7.16.1</version>
+		</dependency>
+++++++ ALT + F5-> Enter
+```
+
+## Spring security Default Login page
+- `starter-web` + `spring-security`
+> code is in console log user: 95756b29-8a82-45c3-abdc-f611a824e86a pej
+- Security esta antes de cada ruta by default y no hce falta configurar nada mas; check `DefaultLoginPage`
+-it can be configured in `.properties` with `spring.security.user.name` +`spring.security.user.password` but its plain text

@@ -14,6 +14,9 @@ import com.twilio.Twilio;
 @Component
 public class TwilioControllerComponent implements CommandLineRunner {
 	private static final Logger logger= LoggerFactory.getLogger(TwilioControllerComponent.class);
+	/*make application.properties for this from  
+	 * https://www.twilio.com/console   calls project
+	 * */
 	@Value("${app.twilo.id}")
 	private String twilioId;
 	@Value("${app.twilo.authid}")
