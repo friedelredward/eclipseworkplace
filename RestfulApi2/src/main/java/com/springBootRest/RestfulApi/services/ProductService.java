@@ -23,6 +23,7 @@ public class ProductService {
 			new Product( "ordenador4")
 			);
 	
+	
 	@Autowired
 	private ProductRepository productRepo;
 	
